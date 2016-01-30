@@ -1,5 +1,6 @@
 from gui.levels.level import *
 from gui.widgets.button import *
+from gui.widgets.player import *
 import pygame
 
 class MainMenu(Level):
@@ -15,6 +16,8 @@ class MainMenu(Level):
 
         self.__hostButton = Button(self.screen(), "Host", 250, 200, 300, 50)
         self.__joinButton = Button(self.screen(), "Join", 250, 270, 300, 50)
+
+        self.__player = Player()
 
 
     def click(self, point):
@@ -38,3 +41,5 @@ class MainMenu(Level):
 
         self.__hostButton.render()
         self.__joinButton.render()
+
+        self.__player.render(self.screen().surface())

@@ -9,5 +9,5 @@ class Server:
 
     def __init__(self, mode):
 
-        # Create the list of clients
-        self.__clients = []
+        # Create the list of players
+        self.__players= []
