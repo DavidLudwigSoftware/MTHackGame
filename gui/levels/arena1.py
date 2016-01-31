@@ -18,7 +18,28 @@ class Arena1(Level):
 
         super(Arena1, self).__init__(app)
 
-        self.__player = PhysicsPlayer(app.screen())
+        self.__gravity = 0.5
+
+        self.__friction = 0.2
+
+        self.__floor = 65
+
+        self.__player = PhysicsPlayer(app.screen(), self)
+
+
+    def gravity(self):
+
+        return self.__gravity
+
+
+    def friction(self):
+
+        return self.__friction
+
+
+    def floor(self):
+
+        return self.__floor
 
 
     def update(self):
