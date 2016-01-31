@@ -33,7 +33,7 @@ class MainMenu(Level):
 
         self.__controller.update()
 
-        self.screen().surface().fill((0x21, 0x21, 0x21))
+        self.screen().surface().fill((0xf9, 0xda, 0x03))
 
         self.__hostButton.render()
         self.__joinButton.render()

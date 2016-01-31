@@ -54,7 +54,7 @@ class Button(Widget):
         else:
 
             # Set the default color
-            color = (0xff, 0x57, 0x22)
+            color = (0xfb, 0x81, 0x14)
 
         # Draw the button shape
         pygame.draw.rect(self.screen().surface(), color, self.rect())

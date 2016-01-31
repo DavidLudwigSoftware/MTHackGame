@@ -29,6 +29,11 @@ class Text(Widget):
         self.setText(text)
 
 
+    def text(self):
+
+        return self.__text
+
+
     def setText(self, text):
 
         # Update the text
@@ -55,7 +60,7 @@ class Text(Widget):
 
     def render(self):
 
-        
+
         if self.__center:
 
             # Create the coordinate point
