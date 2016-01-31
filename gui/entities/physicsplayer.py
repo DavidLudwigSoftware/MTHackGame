@@ -24,6 +24,9 @@ class PhysicsPlayer(Player):
         self.__speed = 1
 
         self.__controller = PlayerController()
+        self.__controller.onKeyPress(self.keypress)
+        self.__controller.onKeyRelease(self.keyrelease)
+
 
 
     def calcposition(self):
@@ -52,6 +55,7 @@ class PhysicsPlayer(Player):
                 if self.__dx > 0.0:
                     self.__dx = 0.0
 
+
         #calculate gravity
         if self.__dy <= 10:
             self.__dy = self.__dy - self.world().gravity()
@@ -79,7 +83,13 @@ class PhysicsPlayer(Player):
         self.setX(newx)
         self.setY(newy)
 
+    def keypress(self, key):
+        if key == pygame.K_z:
+            self.__dy = 10
 
+    def keyrelease(self, key):
+        if key == pygame.K_x:
+            pass
 
     def update(self):
 
