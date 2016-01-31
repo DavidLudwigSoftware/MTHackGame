@@ -42,9 +42,13 @@ class PhysicsPlayer(Player):
         #gets keyboard input
 
         if self.__controller.key(pygame.K_LEFT):
+            self.facing = Player.FacingNeutral+Player.FacingLeft
+
             if self.__dx <= 5:
                 self.__dx = self.__dx + self.__speed
         elif self.__controller.key(pygame.K_RIGHT):
+            self.facing = Player.FacingNeutral+Player.FacingRight
+
             if self.__dx >= -5:
                 self.__dx = self.__dx - self.__speed
         else:
@@ -56,6 +60,17 @@ class PhysicsPlayer(Player):
                 self.__dx = self.__dx + self.world().friction()
                 if self.__dx > 0.0:
                     self.__dx = 0.0
+
+        if self.__controller.key(pygame.K_UP):
+            if self.facing & 1:
+                self.facing = Player.FacingUp+Player.FacingRight
+            else:
+                self.facing = Player.FacingUp+Player.FacingLeft
+        elif self.__controller.key(pygame.K_DOWN):
+            if self.facing & 1:
+                self.facing = Player.FacingDown+Player.FacingRight
+            else:
+                self.facing = Player.FacingDown+Player.FacingLeft
 
 
         #calculate gravity
