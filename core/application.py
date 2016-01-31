@@ -1,8 +1,16 @@
+# Import python modules
 import pygame
+import random
+
 from gui.display import *
+
+# Import the core modules
+from core.server import *
 
 # Import the levels
 from gui.levels.mainmenu import *
+from gui.levels.joinmenu import *
+from gui.levels.arena1   import *
 
 
 class Application:
@@ -10,8 +18,11 @@ class Application:
     # Store the current application instance
     __instance = None
 
-    # Store the current controller
-    __controller = None
+
+    # Store the battle arenas
+    Arenas = (
+        Arena1,
+    )
 
 
     @staticmethod
@@ -99,6 +110,30 @@ class Application:
 
         # Create the new level
         self.__level = level(self)
+
+
+    def mainMenu(self):
+
+        self.setLevel(MainMenu)
+
+
+    def joinMenu(self):
+
+        self.setLevel(JoinMenu)
+
+
+    def host(self):
+
+        # Set the level to a random arena
+        self.setLevel(
+            Application.Arenas[
+                random.randrange(0, len(Application.Arenas))
+            ]
+        )
+
+    def join(self, serverIp):
+
+        pass
 
 
     def close(self, exitCode = 0):

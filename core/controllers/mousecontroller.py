@@ -25,8 +25,6 @@ class MouseController:
 
                 self.__clickCallback(pygame.mouse.get_pos())
 
-                print(pygame.key.get_pressed())
-
 
         elif not pygame.mouse.get_pressed()[0]:
 

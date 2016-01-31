@@ -13,6 +13,16 @@ class Display:
         self.__screen = pygame.display.set_mode((width, height))
 
 
+    def width(self):
+
+        return self.__width
+
+
+    def height(self):
+
+        return self.__height
+
+
     def render(self):
 
         # Render the screen
