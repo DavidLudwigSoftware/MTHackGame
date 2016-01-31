@@ -27,6 +27,8 @@ class Server:
             len(self.__players)
         )
 
+        self.__arena.addPlayer(player)
+
         player.setController(ServerController(player))
 
         self.__players[addr] = player
@@ -75,7 +77,7 @@ class Server:
 
         for addr in self.__players:
 
-            self.send(addr, )
+            self.send(addr, data)
 
 
     def send(self, addr, data):
@@ -84,8 +86,6 @@ class Server:
 
 
     def update(self):
-
-        print("Updating...")
 
         while not self.__done:
 
@@ -108,3 +108,8 @@ class Server:
                 break
 
             self.sendUpdates()
+
+
+    def __del__(self):
+
+        self.__socket.close()

@@ -12,7 +12,7 @@ class NetworkPlayer(Player):
 
         print(player)
 
-        super(NetworkPlayer, self).__init__(self, screen, world, player)
+        super(NetworkPlayer, self).__init__(screen, world, player)
 
         self.__controller = ServerController(self)
 

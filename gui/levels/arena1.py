@@ -34,7 +34,14 @@ class Arena1(Level):
 
         self.__background = pygame.image.load('res/textures/spacebkg.png')
 
-        self.__player = PhysicsPlayer(app.screen(), self)
+        self.__players = [
+            PhysicsPlayer(app.screen(), self),
+        ]
+
+
+    def addPlayer(self, player):
+
+        self.__players.append(player)
 
 
     def gravity(self):
@@ -57,9 +64,9 @@ class Arena1(Level):
         return self.__platforms
 
 
-    def player(self):
+    def player(self, player = 0):
 
-        return self.__player
+        return self.__players[player]
 
 
     def update(self):
@@ -76,4 +83,7 @@ class Arena1(Level):
 
             platform.render()
 
-        self.__player.update()
+
+        for player in self.__players:
+
+            player.update()

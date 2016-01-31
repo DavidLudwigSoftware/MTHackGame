@@ -45,7 +45,7 @@ class Player(Entity):
 
     def id(self):
 
-        return self.player()
+        return self.__player
 
 
     def update(self):

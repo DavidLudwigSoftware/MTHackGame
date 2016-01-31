@@ -140,7 +140,12 @@ class Application:
             ]
         )
 
-        #self.__server = Server(self.level())
+        if self.__server:
+
+            del self.__server
+
+        self.__server = Server(self.level())
+
 
     def join(self, serverIp):
 
