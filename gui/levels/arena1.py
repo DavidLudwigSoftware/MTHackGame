@@ -26,7 +26,9 @@ class Arena1(Level):
         self.__floor = 65
 
         self.__platforms = [
-            Platform(self.screen(), self, Platform.Invisible, 350, 300, 100, 32)
+            Platform(self.screen(), self, Platform.Invisible, -1, 0, 1, self.screen().height()),
+            Platform(self.screen(), self, Platform.Invisible, self.screen().width()+1, 0, 1, self.screen().height()),
+            Platform(self.screen(), self, Platform.Invisible, 0, -1, self.screen().width(), 1)
         ]
 
         self.__background = pygame.image.load('res/textures/spacebkg.png')
