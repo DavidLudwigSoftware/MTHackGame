@@ -27,8 +27,8 @@ class Arena1(Level):
         self.__floor = 65
 
         self.__platforms = [
-            Platform(self.screen(), self, Platform.Invisible, -1, 0, 1, self.screen().height()),
-            Platform(self.screen(), self, Platform.Invisible, self.screen().width()+1, 0, 1, self.screen().height()),
+            Platform(self.screen(), self, Platform.Invisible, -1-8, 0, 1, self.screen().height()),
+            Platform(self.screen(), self, Platform.Invisible, self.screen().width()+1+8, 0, 1, self.screen().height()),
             Platform(self.screen(), self, Platform.Invisible, 0, -1, self.screen().width(), 1)
         ]
 
