@@ -11,6 +11,16 @@ class Entity:
         self.__rect = rect
 
 
+    def setController(self, controller):
+
+        self.__controller = controller
+
+
+    def controller(self):
+
+        return self.__controller
+
+
     def update(self):
 
         pass

@@ -3,6 +3,8 @@ import socket
 
 class Server:
 
+    MaxPlayers
+
     def __init__(self, arena):
 
         self.__arena   = arena
@@ -14,9 +16,17 @@ class Server:
 
     def onConnected(self, addr, data):
 
-        if len(self.__players) > 1:
+        player = NetworkPlayer(
+            self.__arena,
+            self.__arena.world(),
+            len(self.__players[])
+        )
 
-            self.__players[addr] = NetworkPlayer()
+        player.setController(ServerController())
+
+        self.__players[addr] = player
+
+        self.send(addr, {"c":1,"lvl":0,"p":len(self.__players)}
 
 
     def onDisconnected(self, addr):
@@ -44,6 +54,20 @@ class Server:
         pass
 
 
+    def sendUpdates(self):
+
+        data = {}
+
+        for key in self.__players:
+
+            controller = self.__players[key]
+            score =
+
+        for addr in self.__players:
+
+            self.send(addr, )
+
+
     def update(self):
 
         while not self.__done:
@@ -54,7 +78,7 @@ class Server:
 
                 data = eval(parseData(data))
 
-                if addr not in self.__players:
+                if addr not in self.__players and len(self.__players) < Server.MaxPlayers:
 
                     self.onConnected(addr, data)
 
@@ -65,3 +89,5 @@ class Server:
             except socket.error:
 
                 break
+
+            self.sendUpdates()

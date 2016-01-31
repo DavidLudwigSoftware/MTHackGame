@@ -40,6 +40,8 @@ class Player(Entity):
         self.__MHP = 100
         self.__HP = self.__MHP
 
+        self.setSprite(4)
+
 
     def update(self):
 
@@ -54,9 +56,19 @@ class Player(Entity):
         self.__HP = self.__HP - damage
 
 
+    def sprite(self):
+
+        return self.__sprite
+
+
+    def setSprite(self, sprite):
+
+        return self.__sprite = sprite[sprite]
+
+
     def render(self):
 
-        self.screen().surface().blit(self.__sprites[4], (self.x(), self.y()))
+        self.screen().surface().blit(self.__sprite, (self.x(), self.y()))
 
     def facing(self):
         return self.__facing
