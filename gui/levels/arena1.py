@@ -29,6 +29,8 @@ class Arena1(Level):
             #Platform(self.screen(), self, Platform.Invisible, 0, 568, 800, 32)
         ]
 
+        self.__background = pygame.image.load('res/textures/spacebkg.png')
+
         self.__player = PhysicsPlayer(app.screen(), self)
 
 
@@ -60,7 +62,7 @@ class Arena1(Level):
 
             return self.app().mainMenu()
 
-        self.screen().surface().fill((0, 0, 0))
+        self.screen().surface().blit(self.__background, (0, 0))
 
         for platform in self.__platforms:
 

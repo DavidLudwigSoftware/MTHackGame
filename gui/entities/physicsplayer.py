@@ -88,7 +88,4 @@ class PhysicsPlayer(Player):
         self.calcposition()
 
         # Render the player (Leave this on the end)
-        try:
-            self.render()
-        except:
-            pass
+        self.render()
