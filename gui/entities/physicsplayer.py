@@ -21,6 +21,8 @@ class PhysicsPlayer(Player):
         self.__dx = 0.0
         self.__dy = 0.0
 
+        self.__speed = 1
+
         self.__controller = PlayerController()
 
 
@@ -32,34 +34,58 @@ class PhysicsPlayer(Player):
         tempw = self.right() - self.__dx
         temph = self.bottom() - self.__dy
 
+        #gets keyboard input
+
+        if self.__controller.key(pygame.K_LEFT):
+            if self.__dx <= 5:
+                self.__dx = self.__dx + self.__speed
+        elif self.__controller.key(pygame.K_RIGHT):
+            if self.__dx >= -5:
+                self.__dx = self.__dx - self.__speed
+        else:
+            if self.__dx > 0.0:
+                self.__dx = self.__dx - self.world().friction()
+                if self.__dx < 0.0:
+                    self.__dx = 0.0
+            elif self.__dx < 0.0:
+                self.__dx = self.__dx + self.world().friction()
+                if self.__dx > 0.0:
+                    self.__dx = 0.0
+
         #calculate gravity
         if self.__dy <= 10:
             self.__dy = self.__dy - self.world().gravity()
 
-        if (self.screen().height() - self.world().floor()/2) <= temph:
-            self.__dy = self.__dy + (temph - (self.screen().height() - self.world().floor()/2))
+        #sets the delta y properly
+        if (self.screen().height() - self.world().floor()/2) <= self.bottom():
+            self.__dy = self.__dy + (self.bottom() - (self.screen().height() - self.world().floor()/2)) - self.height()
             if self.__dy < 0.0:
-                print("This happened", temph, self.screen().height() - self.world().floor()/2)
                 self.__dy = 0.0
-
-        print(self.__dy)
 
         newx = self.x() - self.__dx
         newy = self.y() - self.__dy
 
+
+        #saftey for if the object goes past floor
         if (self.screen().height() - self.world().floor()/2) < self.bottom():
+            newy = (self.screen().height() - self.world().floor()/2) - self.height()
+
+
+        #anti jitter
+        if ((self.screen().height() - self.world().floor()/2) <= temph) and (self.__dy < 0.0):
             newy = (self.screen().height() - self.world().floor()/2) - self.height()
 
         #set the new x and y variable
         self.setX(newx)
         self.setY(newy)
 
-        return newx, newy
 
 
     def update(self):
 
-        tx, ty = self.calcposition()
+        self.calcposition()
+
+        self.__controller.update()
 
         # Render the player (Leave this on the end)
         try:
