@@ -22,11 +22,12 @@ class PhysicsPlayer(Player):
         self.__dy = 0.0
 
         self.__speed = 1
+        self.__facing = 0
 
         self.__controller = PlayerController()
         self.__controller.onKeyPress(self.keypress)
         self.__controller.onKeyRelease(self.keyrelease)
-        
+
 
     def calcposition(self):
 
@@ -39,12 +40,12 @@ class PhysicsPlayer(Player):
         #gets keyboard input
 
         if self.__controller.key(pygame.K_LEFT):
-            self.facing = Player.FacingNeutral+Player.FacingLeft
+            self.__facing = Player.FacingNeutral+Player.FacingLeft
 
             if self.__dx <= 5:
                 self.__dx = self.__dx + self.__speed
         elif self.__controller.key(pygame.K_RIGHT):
-            self.facing = Player.FacingNeutral+Player.FacingRight
+            self.__facing = Player.FacingNeutral+Player.FacingRight
 
             if self.__dx >= -5:
                 self.__dx = self.__dx - self.__speed
@@ -59,15 +60,15 @@ class PhysicsPlayer(Player):
                     self.__dx = 0.0
 
         if self.__controller.key(pygame.K_UP):
-            if self.facing & 1:
-                self.facing = Player.FacingUp+Player.FacingRight
+            if self.__facing & 1:
+                self.__facing = Player.FacingUp+Player.FacingRight
             else:
-                self.facing = Player.FacingUp+Player.FacingLeft
+                self.__facing = Player.FacingUp+Player.FacingLeft
         elif self.__controller.key(pygame.K_DOWN):
-            if self.facing & 1:
-                self.facing = Player.FacingDown+Player.FacingRight
+            if self.__facing & 1:
+                self.__facing = Player.FacingDown+Player.FacingRight
             else:
-                self.facing = Player.FacingDown+Player.FacingLeft
+                self.__facing = Player.FacingDown+Player.FacingLeft
 
 
         #calculate gravity
@@ -136,11 +137,21 @@ class PhysicsPlayer(Player):
         if key == pygame.K_x:
             pass
 
+
+    def setFacing(self, facing):
+
+        self.__facing = facing
+
     def update(self):
 
         self.__controller.update()
 
         self.calcposition()
+
+        if self.__facing & 1:
+            self.setSprite(4)
+        else:
+            self.setSprite(0)
 
         # Render the player (Leave this on the end)
         self.render()

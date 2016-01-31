@@ -13,5 +13,5 @@ class ServerController:
 
         self.__player.setX(data['px'])
         self.__player.setY(data['px'])
-        self.__player.setAngle(angle)
+        self.__player.setAngle('ngl')
         self.__player.setSprite(data['spr'])

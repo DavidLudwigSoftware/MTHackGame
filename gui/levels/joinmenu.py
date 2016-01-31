@@ -23,15 +23,15 @@ class JoinMenu(Level):
 
         self.__controller.onClick(self.click)
 
-        self.__ipInput    = IpInput(self.screen(), 250, 200, 300, 50)
-        self.__joinButton = Button(self.screen(), "Join", 250, 270, 300, 50)
+        self.__ipInput    = IpInput(self.screen(), 250, 250, 300, 50)
+        self.__joinButton = Button(self.screen(), "Join", 250, 320, 300, 50)
 
 
     def click(self, point):
 
         if self.__joinButton.isInside(point[0], point[1]):
 
-            self.app().join('127.0.0.1')
+            self.app().join(self.__ipInput.text())
 
 
     def update(self):

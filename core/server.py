@@ -33,6 +33,7 @@ class Server:
 
         self.__players[addr] = player
 
+
         self.send(addr, {"c":1,"lvl":self.__arena.Id,"p":len(self.__players) - 1})
 
 
@@ -56,33 +57,39 @@ class Server:
         pass
 
 
-    def parseData(self, data):
+    def parseData(self, addr, data):
 
-        pass
+        player = self.__players[addr]
+
+        player.setX(data['x'])
+        player.setY(data['y'])
+        player.setSprite(data['spr'])
 
 
     def sendUpdates(self):
 
-        data = {}
+        data = []
 
         for player in self.__players.values():
 
-            data[player] = {
+            data.append({
                 'p'   : player.id(),
                 'spr' : player.sprite(),
                 'x'   : player.x(),
                 'y'   : player.y(),
                 'ngl' : 0,
-            }
+            })
 
         for addr in self.__players:
 
-            self.send(addr, data)
+            if addr != '127.0.0.1':
+
+                self.send(addr, data)
 
 
     def send(self, addr, data):
 
-        pass
+        self.__socket.sendto(bytes(str(data).encode()), addr)
 
 
     def update(self):
@@ -101,7 +108,7 @@ class Server:
 
                 else:
 
-                    self.parseData(data)
+                    self.parseData(addr, data)
 
             except socket.error:
 

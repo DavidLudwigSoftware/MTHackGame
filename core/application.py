@@ -6,11 +6,13 @@ from gui.display import *
 
 # Import the core modules
 from core.server import *
+from core.client import *
 
 # Import the levels
-from gui.levels.mainmenu import *
-from gui.levels.joinmenu import *
-from gui.levels.arena1   import *
+from gui.levels.connectingmenu import *
+from gui.levels.mainmenu       import *
+from gui.levels.joinmenu       import *
+from gui.levels.arena1         import *
 
 
 class Application:
@@ -44,6 +46,11 @@ class Application:
 
         # Initialize pygame
         pygame.init()
+
+        # Load music
+        pygame.mixer.init()
+        pygame.mixer.music.load('res/sounds/music/superspacefreak.wav')
+        pygame.mixer.music.play(-1)
 
         # Create the display
         self.__screen = Display(800, 600)
@@ -107,7 +114,7 @@ class Application:
         return self.__level
 
 
-    def setLevel(self, level):
+    def setLevel(self, level, player = None):
 
         # Check if a level is currently active
         if self.__level:
@@ -115,8 +122,19 @@ class Application:
             # Delete the current level
             del self.__level
 
-        # Create the new level
-        self.__level = level(self)
+        if player:
+
+            self.__level = level(self, player)
+
+        else:
+
+            # Create the new level
+            self.__level = level(self)
+
+
+    def setArena(self, level, player):
+
+        self.setLevel(Application.Arenas[level], player)
 
 
     def mainMenu(self):
@@ -149,7 +167,9 @@ class Application:
 
     def join(self, serverIp):
 
-        pass
+        self.setLevel(ConnectingMenu)
+
+        self.__server = Client(self, serverIp)
 
 
     def close(self, exitCode = 0):

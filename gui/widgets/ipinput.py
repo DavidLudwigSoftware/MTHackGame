@@ -82,6 +82,11 @@ class IpInput(Widget):
                     self.__keyMap[key] = False
 
 
+    def text(self):
+
+        return self.__text.text()
+
+
     def render(self):
 
         if self.isInside(pygame.mouse.get_pos()):

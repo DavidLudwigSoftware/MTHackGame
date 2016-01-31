@@ -16,7 +16,7 @@ class Arena1(Level):
 
     Id = 0
 
-    def __init__(self, app):
+    def __init__(self, app, playerId = 0):
 
         super(Arena1, self).__init__(app)
 
@@ -35,7 +35,7 @@ class Arena1(Level):
         self.__background = pygame.image.load('res/textures/spacebkg.png')
 
         self.__players = [
-            PhysicsPlayer(app.screen(), self),
+            PhysicsPlayer(app.screen(), self, playerId),
         ]
 
 
