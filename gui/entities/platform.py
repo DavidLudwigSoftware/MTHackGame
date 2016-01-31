@@ -18,8 +18,8 @@ class Platform(Entity):
 
     def render(self):
 
-        if self.__style == Platform.Invisible:
+        pass
 
-            pygame.draw.rect(self.screen().surface(), (0x00, 0xff, 0x00), self.rect())
+        #if self.__style == Platform.Invisible:
 
-            return
+            #pygame.draw.rect(self.screen().surface(), (0x00, 0xff, 0x00), self.rect())

@@ -18,10 +18,9 @@ class Player(Entity):
     def __init__(self, screen, world, player = 0, facing = FacingLeft+FacingNeutral):
 
         self.__player = player
-        self.__rect = [0, 0, 50, 50]
 
         self.__facing = facing
-
+        print(player)
         name = "res/sprites/players/p" + str(player + 1) + "_"
 
         self.__sprites = [
@@ -34,6 +33,7 @@ class Player(Entity):
             pygame.image.load(name + "rwalk3.png"),
             pygame.image.load(name + "rwalk4.png"),
         ]
+        self.__rect = self.__sprites[0].get_rect()
 
         super(Player, self).__init__(screen, world, self.__rect)
 
@@ -41,6 +41,11 @@ class Player(Entity):
         self.__HP = self.__MHP
 
         self.setSprite(4)
+
+
+    def id(self):
+
+        return self.player()
 
 
     def update(self):
@@ -63,7 +68,7 @@ class Player(Entity):
 
     def setSprite(self, sprite):
 
-        return self.__sprite = sprite[sprite]
+        self.__sprite = self.__sprites[sprite]
 
 
     def render(self):

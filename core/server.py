@@ -1,32 +1,37 @@
 import socket
 
+from gui.entities.networkplayer import *
+from core.controllers.servercontroller import *
 
 class Server:
 
-    MaxPlayers
+    MaxPlayers = 4
 
     def __init__(self, arena):
 
         self.__arena   = arena
-        self.__players = {}
+        self.__players = {'127.0.0.1': arena.player()}
 
-        self.__socket = socket(AF_INET, SOCK_DGRAM)
+        self.__socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.__socket.bind(('', 42069))
+        self.__socket.setblocking(False)
+
+        self.__done = False
 
 
     def onConnected(self, addr, data):
 
         player = NetworkPlayer(
+            self.__arena.screen(),
             self.__arena,
-            self.__arena.world(),
-            len(self.__players[])
+            len(self.__players)
         )
 
-        player.setController(ServerController())
+        player.setController(ServerController(player))
 
         self.__players[addr] = player
 
-        self.send(addr, {"c":1,"lvl":0,"p":len(self.__players)}
+        self.send(addr, {"c":1,"lvl":self.__arena.Id,"p":len(self.__players) - 1})
 
 
     def onDisconnected(self, addr):
@@ -58,25 +63,37 @@ class Server:
 
         data = {}
 
-        for key in self.__players:
+        for player in self.__players.values():
 
-            controller = self.__players[key]
-            score =
+            data[player] = {
+                'p'   : player.id(),
+                'spr' : player.sprite(),
+                'x'   : player.x(),
+                'y'   : player.y(),
+                'ngl' : 0,
+            }
 
         for addr in self.__players:
 
             self.send(addr, )
 
 
+    def send(self, addr, data):
+
+        pass
+
+
     def update(self):
+
+        print("Updating...")
 
         while not self.__done:
 
             try:
 
-                data, addr = socket.recvfrom(1024)
+                data, addr = self.__socket.recvfrom(1024)
 
-                data = eval(parseData(data))
+                data = eval(data.decode())
 
                 if addr not in self.__players and len(self.__players) < Server.MaxPlayers:
 
@@ -84,7 +101,7 @@ class Server:
 
                 else:
 
-                    parseData(data)
+                    self.parseData(data)
 
             except socket.error:
 

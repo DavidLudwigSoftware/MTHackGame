@@ -26,7 +26,7 @@ class PhysicsPlayer(Player):
         self.__controller = PlayerController()
         self.__controller.onKeyPress(self.keypress)
         self.__controller.onKeyRelease(self.keyrelease)
-
+        
 
     def calcposition(self):
 
@@ -67,6 +67,37 @@ class PhysicsPlayer(Player):
 
         newx = self.x() - self.__dx
         newy = self.y() - self.__dy
+
+
+        for platform in self.world().platforms():
+
+
+            # Check if over or below a platform
+            if self.right() > platform.x() and self.x() < platform.right():
+
+                if self.bottom() <= platform.y() and newy + self.height() > platform.y():
+
+                    newy = platform.y() - self.height()
+                    self.__dy = 0.0
+
+                elif self.y() >= platform.bottom() and newy < platform.bottom():
+
+                    newy = platform.bottom()
+                    self.__dy = 0.0
+
+            if self.y() <= platform.bottom() and self.bottom() >= platform.y():
+
+                if self.right() <= platform.x() and newx + self.height() > platform.x():
+
+                    newx = platform.x() - self.height()
+                    self.__dx = 0.0
+
+                elif self.x() >= platform.right() and newx < platform.right():
+
+                    newx = platform.right()
+                    self.__dx = 0.0
+
+
 
 
         #saftey for if the object goes past floor

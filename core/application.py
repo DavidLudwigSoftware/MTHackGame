@@ -140,7 +140,7 @@ class Application:
             ]
         )
 
-        #self.__server = Server(arena)
+        #self.__server = Server(self.level())
 
     def join(self, serverIp):
 

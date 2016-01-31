@@ -10,6 +10,10 @@ class NetworkPlayer(Player):
 
     def __init__(self, screen, world, player = 1):
 
+        print(player)
+
+        super(NetworkPlayer, self).__init__(self, screen, world, player)
+
         self.__controller = ServerController(self)
 
         self.__angle = 0
