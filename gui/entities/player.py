@@ -19,7 +19,7 @@ class Player(Entity):
 
         self.__player = player
 
-        self.__facing = facing
+        self.facing = facing
         print(player)
         name = "res/sprites/players/p" + str(player + 1) + "_"
 
@@ -50,6 +50,14 @@ class Player(Entity):
 
     def update(self):
 
+        if self.facing & 1:
+            self.setSprite(4)
+            print("sdfsdf")
+        else:
+            self.setSprite(0)
+
+        print(self.facing)
+
         self.render()
 
     def hp(self):
@@ -72,8 +80,13 @@ class Player(Entity):
 
 
     def render(self):
+        if self.facing & 1:
+            self.setSprite(4)
+        else:
+            self.setSprite(0)
+
 
         self.screen().surface().blit(self.__sprite, (self.x(), self.y()))
 
     def facing(self):
-        return self.__facing
+        return self.facing
