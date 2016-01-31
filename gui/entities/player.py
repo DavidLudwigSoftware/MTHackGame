@@ -24,7 +24,14 @@ class Player(Entity):
         name = "res/sprites/players/p" + str(player + 1) + "_"
 
         self.__sprites = [
-            pygame.image.load(name + "rgun.png")
+            pygame.image.load(name + "lwalk1.png"),
+            pygame.image.load(name + "lwalk2.png"),
+            pygame.image.load(name + "lwalk3.png"),
+            pygame.image.load(name + "lwalk4.png"),
+            pygame.image.load(name + "rwalk1.png"),
+            pygame.image.load(name + "rwalk2.png"),
+            pygame.image.load(name + "rwalk3.png"),
+            pygame.image.load(name + "rwalk4.png"),
         ]
 
         super(Player, self).__init__(screen, world, self.__rect)
@@ -37,7 +44,7 @@ class Player(Entity):
 
     def render(self):
 
-        self.screen().surface().blit(self.__sprites[0], (self.x(), self.y()))
+        self.screen().surface().blit(self.__sprites[4], (self.x(), self.y()))
 
     def facing(self):
         return self.__facing

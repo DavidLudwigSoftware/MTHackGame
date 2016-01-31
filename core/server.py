@@ -5,12 +5,18 @@ class Server:
 
     def __init__(self, arena):
 
-        self.__arena = arena
+        self.__arena   = arena
+        self.__players = {}
+
+        self.__socket = socket(AF_INET, SOCK_DGRAM)
+        self.__socket.bind(('', 42069))
 
 
-    def onConnected(self, data):
+    def onConnected(self, addr, data):
 
-        pass
+        if len(self.__players) > 1:
+
+            self.__players[addr] = NetworkPlayer()
 
 
     def onDisconnected(self, addr):
@@ -50,7 +56,7 @@ class Server:
 
                 if addr not in self.__players:
 
-                    self.onConnected(data)
+                    self.onConnected(addr, data)
 
                 else:
 
