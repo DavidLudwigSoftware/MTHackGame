@@ -24,10 +24,23 @@ class Player(Entity):
 
         super(Player, self).__init__(screen, world, self.__rect)
 
+        self.__MHP = 100
+        self.__HP = self.__MHP
+
+        
+
 
     def update(self):
 
         self.render()
+
+    def hp(self):
+
+        return self.__HP
+
+    def takedamage(self, damage):
+
+        self.__HP = self.__HP - damage
 
 
     def render(self):

@@ -27,6 +27,8 @@ class PhysicsPlayer(Player):
         self.__controller.onKeyPress(self.keypress)
         self.__controller.onKeyRelease(self.keyrelease)
 
+        
+
 
 
     def calcposition(self):
