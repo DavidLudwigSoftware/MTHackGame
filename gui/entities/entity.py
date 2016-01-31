@@ -3,9 +3,10 @@
 
 class Entity:
 
-    def __init__(self, screen, rect):
+    def __init__(self, screen, world, rect):
 
         self.__screen = screen
+        self.__world = world
 
         self.__rect = rect
 
@@ -25,6 +26,11 @@ class Entity:
         return self.__screen
 
 
+    def world(self):
+
+        return self.__world
+
+
     def x(self):
 
         return self.__rect[0]
@@ -37,12 +43,12 @@ class Entity:
 
     def setX(self, x):
 
-        self.__rect[0] = x
+        self.__rect[0] = int(x)
 
 
     def setY(self, y):
 
-        self.__rect[1] = y
+        self.__rect[1] = int(y)
 
 
     def width(self):
@@ -53,6 +59,16 @@ class Entity:
     def height(self):
 
         return self.__rect[3]
+
+
+    def bottom(self):
+
+        return self.height() + self.y()
+
+
+    def right(self):
+
+        return self.width() + self.x()
 
 
     def rect(self):
