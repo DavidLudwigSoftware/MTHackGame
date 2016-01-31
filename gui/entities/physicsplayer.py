@@ -34,6 +34,8 @@ class PhysicsPlayer(Player):
         tempw = self.right() - self.__dx
         temph = self.bottom() - self.__dy
 
+        #gets keyboard input
+
         if self.__controller.key(pygame.K_LEFT):
             if self.__dx <= 5:
                 self.__dx = self.__dx + self.__speed
@@ -54,7 +56,7 @@ class PhysicsPlayer(Player):
         if self.__dy <= 10:
             self.__dy = self.__dy - self.world().gravity()
 
-
+        #sets the delta y properly
         if (self.screen().height() - self.world().floor()/2) <= self.bottom():
             self.__dy = self.__dy + (self.bottom() - (self.screen().height() - self.world().floor()/2)) - self.height()
             if self.__dy < 0.0:
@@ -64,7 +66,7 @@ class PhysicsPlayer(Player):
         newy = self.y() - self.__dy
 
 
-        #saftey for if
+        #saftey for if the object goes past floor
         if (self.screen().height() - self.world().floor()/2) < self.bottom():
             newy = (self.screen().height() - self.world().floor()/2) - self.height()
 
@@ -77,12 +79,11 @@ class PhysicsPlayer(Player):
         self.setX(newx)
         self.setY(newy)
 
-        return newx, newy
 
 
     def update(self):
 
-        tx, ty = self.calcposition()
+        self.calcposition()
 
         self.__controller.update()
 
