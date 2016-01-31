@@ -41,6 +41,16 @@ class Entity:
         return self.__rect[1]
 
 
+    def centerX(self):
+
+        return self.__rect[0] + self.__rect[2] / 2
+
+
+    def centerY(self):
+
+        return self.__rect[1] + self.__rect[3] / 2
+
+
     def setX(self, x):
 
         self.__rect[0] = int(x)

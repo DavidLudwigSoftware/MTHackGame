@@ -9,6 +9,7 @@ from gui.levels.level import *
 
 # Import the entities
 from gui.entities.physicsplayer import *
+from gui.entities.platform      import *
 
 
 class Arena1(Level):
@@ -23,6 +24,10 @@ class Arena1(Level):
         self.__friction = 0.2
 
         self.__floor = 65
+
+        self.__platforms = [
+            #Platform(self.screen(), self, Platform.Invisible, 0, 568, 800, 32)
+        ]
 
         self.__player = PhysicsPlayer(app.screen(), self)
 
@@ -42,6 +47,11 @@ class Arena1(Level):
         return self.__floor
 
 
+    def platforms(self):
+
+        return self.__platforms
+
+
     def update(self):
 
         super(Arena1, self).update()
@@ -51,5 +61,9 @@ class Arena1(Level):
             return self.app().mainMenu()
 
         self.screen().surface().fill((0, 0, 0))
+
+        for platform in self.__platforms:
+
+            platform.render()
 
         self.__player.update()
