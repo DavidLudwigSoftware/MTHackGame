@@ -56,10 +56,10 @@ class PlayerController:
 
                 if keys[key]:
 
-                    self.onKeyPress(key)
+                    self.__keyPressCallback(key)
 
                 else:
 
-                    self.onKeyRelease(key)
+                    self.__keyReleaseCallback(key)
 
                 self.__keyMap[key] = keys[key]
