@@ -83,9 +83,9 @@ class PhysicsPlayer(Player):
 
     def update(self):
 
-        self.calcposition()
-
         self.__controller.update()
+
+        self.calcposition()
 
         # Render the player (Leave this on the end)
         try:

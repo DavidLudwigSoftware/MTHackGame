@@ -10,4 +10,4 @@ class Server:
     def __init__(self, mode):
 
         # Create the list of players
-        self.__players= []
+        self.__players = []
