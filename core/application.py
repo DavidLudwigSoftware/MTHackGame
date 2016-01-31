@@ -39,6 +39,9 @@ class Application:
         # Store the current application instance
         Application.__instance = self
 
+        # Initialize the server variable
+        self.__server = None
+
         # Initialize pygame
         pygame.init()
 
@@ -87,6 +90,10 @@ class Application:
         # Render the screen
         self.__screen.render()
 
+        if self.__server:
+
+            self.__server.update()
+
 
     def screen(self):
 
@@ -124,12 +131,16 @@ class Application:
 
     def host(self):
 
+        arena = random.randrange(0, len(Application.Arenas))
+
         # Set the level to a random arena
         self.setLevel(
             Application.Arenas[
-                random.randrange(0, len(Application.Arenas))
+                arena
             ]
         )
+
+        #self.__server = Server(arena)
 
     def join(self, serverIp):
 
