@@ -60,7 +60,7 @@ class IpInput(Widget):
 
             text = "IP Address"
 
-        self.__text.setText(text[0:11])
+        self.__text.setText(text[0:14])
 
 
     def updateInput(self):
